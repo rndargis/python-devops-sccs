@@ -539,6 +539,7 @@ class BitbucketCloud(Sccs):
                     # Continuous Deployment done
                     continuous_deployment.version = version
 
+
                 #race condition finish after that statement.
                 #cache[deploy_branch] = continuous_deployment
 
