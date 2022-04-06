@@ -40,6 +40,7 @@ class AsyncCache(object):
         return self.data.get(key)
 
     async def __getitem__(self, key):
+        print(self.data)
         val = self.data.get(key)
         if(val is None):
         
@@ -71,3 +72,14 @@ class AsyncCache(object):
     def __exit__(self,type, value, traceback):
         self.rlock.release()
 
+    def __new__(cls,*args,**kwargs) :
+        print("new cache!")
+        return super().__new__(cls)
+
+    def __getstate__(self) :
+        print("get state")
+        return self.__dict__
+    
+    def __setstate__(self,state):
+        print("set state")
+        self.__dict__ = state

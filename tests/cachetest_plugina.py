@@ -19,12 +19,15 @@ class CacheTest_PluginA(CacheTest_PluginBase):
         self.init_api()
 
     async def get_a(self,key,args=None):
+        print("get")
         return await self.cache["a"][key]
     
     async def __fetch_a(self,key):
+        print("fetch")
         return await self.c.run(key,self.b)
     
     async def __set_a(self,key):
+        print("set_a")
         t = await self.cache["a"]['a']
         t = await self.c.run('a',self.b)
         self.cache["a"]['a'] = t
@@ -32,5 +35,6 @@ class CacheTest_PluginA(CacheTest_PluginBase):
     def init_api(self):
         @app_test.post(f"{self.path}")
         async def __handle_a(request:Request):
+           print("set")
            await self.__set_a('a')
         return __handle_a
